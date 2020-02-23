@@ -19,23 +19,21 @@ public class OptionsEntity implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	@Column(nullable = false)
 	private String optionsId;
-	
+
 	@Column(nullable = false)
 	private String option1;
-	
+
 	@Column(nullable = false)
 	private String option2;
-	
+
 	@Column(nullable = false)
 	private String option3;
-	
+
 	@Column(nullable = false)
 	private String option4;
-	
-//	private List<String> optionsList;
 
 	protected OptionsEntity() {
 		super();
@@ -49,12 +47,6 @@ public class OptionsEntity implements Serializable {
 		this.option3 = option3;
 		this.option4 = option4;
 	}
-
-//	public OptionsEntity(String optionsId, List<String> optionsList) {
-//		super();
-//		this.optionsId = optionsId;
-//		this.optionsList = optionsList;
-//	}
 
 	public Long getId() {
 		return id;
@@ -102,24 +94,13 @@ public class OptionsEntity implements Serializable {
 
 	public List<String> getOptionsList() {
 		List<String> optionsList = new ArrayList<String>();
-		
+
 		optionsList.add(option1);
 		optionsList.add(option2);
 		optionsList.add(option3);
 		optionsList.add(option4);
-		
+
 		return optionsList;
 	}
-
-//	public void setOptionsList(List<String> optionsList) {
-//		this.optionsList = optionsList;
-//	}
-//	
-//	public void setOptionsList() {
-//		this.optionsList.add(option1);
-//		this.optionsList.add(option2);
-//		this.optionsList.add(option3);
-//		this.optionsList.add(option4);
-//	}
 
 }
