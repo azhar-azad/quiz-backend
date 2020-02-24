@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,12 +18,15 @@ public class AnswerEntity implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	@Column(nullable = false)
 	private String answerId;
-	
+
 	@Column(nullable = false)
 	private String text;
+
+	@OneToOne
+	private QuestionEntity question;
 
 	protected AnswerEntity() {
 		super();
@@ -52,6 +56,14 @@ public class AnswerEntity implements Serializable {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public QuestionEntity getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(QuestionEntity question) {
+		this.question = question;
 	}
 
 }

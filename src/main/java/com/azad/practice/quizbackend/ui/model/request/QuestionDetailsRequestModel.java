@@ -1,9 +1,12 @@
 package com.azad.practice.quizbackend.ui.model.request;
 
+import java.util.List;
+
 public class QuestionDetailsRequestModel {
 
 	private String text;
 	private String mark;
+	private List<String> optionsList;
 
 	protected QuestionDetailsRequestModel() {
 		super();
@@ -29,6 +32,14 @@ public class QuestionDetailsRequestModel {
 
 	public void setMark(String mark) {
 		this.mark = mark;
+	}
+
+	public List<String> getOptionsList() {
+		return optionsList;
+	}
+
+	public void setOptionsList(List<String> optionsList) {
+		this.optionsList = optionsList;
 	}
 
 }

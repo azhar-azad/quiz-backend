@@ -1,6 +1,7 @@
 package com.azad.practice.quizbackend.shared.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class QuestionDto implements Serializable {
 
@@ -10,6 +11,7 @@ public class QuestionDto implements Serializable {
 	private String questionId;
 	private String text;
 	private double mark;
+	private List<String> optionsList;
 
 	protected QuestionDto() {
 		super();
@@ -53,6 +55,14 @@ public class QuestionDto implements Serializable {
 
 	public void setMark(double mark) {
 		this.mark = mark;
+	}
+
+	public List<String> getOptionsList() {
+		return optionsList;
+	}
+
+	public void setOptionsList(List<String> optionsList) {
+		this.optionsList = optionsList;
 	}
 
 }

@@ -8,7 +8,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "options")
@@ -35,6 +37,12 @@ public class OptionsEntity implements Serializable {
 	@Column(nullable = false)
 	private String option4;
 
+	@Transient
+	private List<String> optionsList = new ArrayList<String>();
+
+	@OneToOne(mappedBy = "options")
+	private QuestionEntity question;
+
 	protected OptionsEntity() {
 		super();
 	}
@@ -46,6 +54,19 @@ public class OptionsEntity implements Serializable {
 		this.option2 = option2;
 		this.option3 = option3;
 		this.option4 = option4;
+	}
+
+	public OptionsEntity(List<String> optionsList) {
+		super();
+		this.optionsList = optionsList;
+		populateOptinsFromList();
+	}
+
+	private void populateOptinsFromList() {
+		this.option1 = this.optionsList.get(0);
+		this.option2 = this.optionsList.get(1);
+		this.option3 = this.optionsList.get(2);
+		this.option4 = this.optionsList.get(3);
 	}
 
 	public Long getId() {
@@ -101,6 +122,14 @@ public class OptionsEntity implements Serializable {
 		optionsList.add(option4);
 
 		return optionsList;
+	}
+
+	public QuestionEntity getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(QuestionEntity question) {
+		this.question = question;
 	}
 
 }

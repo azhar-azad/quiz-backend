@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 import com.azad.practice.quizbackend.exception.QuestionServiceException;
 import com.azad.practice.quizbackend.io.entity.QuestionEntity;
 import com.azad.practice.quizbackend.io.repository.QuestionRepository;
+import com.azad.practice.quizbackend.service.OptionsService;
 import com.azad.practice.quizbackend.service.QuestionService;
+import com.azad.practice.quizbackend.shared.dto.OptionsDto;
 import com.azad.practice.quizbackend.shared.dto.QuestionDto;
 import com.azad.practice.quizbackend.shared.util.Utils;
 import com.azad.practice.quizbackend.ui.model.response.ErrorMessages;
@@ -27,6 +29,9 @@ public class QuestionServiceImpl implements QuestionService {
 	@Autowired
 	QuestionRepository questionRepository;
 	
+	@Autowired
+	OptionsService optionsService;
+	
 	ModelMapper modelMapper = new ModelMapper();
 
 	@Override
@@ -34,7 +39,11 @@ public class QuestionServiceImpl implements QuestionService {
 		
 		QuestionEntity questionEntity = modelMapper.map(questionDto, QuestionEntity.class);
 		
+		OptionsDto optionsDto = new OptionsDto(questionDto.getText(), questionDto.getOptionsList());
+		OptionsDto savedOptions = optionsService.createOptions(optionsDto);
+		
 		questionEntity.setQuestionId(utils.generateQuestionId(10));
+		questionEntity.setOptions(optionsService.getOptionsByOptionsId(savedOptions.getOptionsId()));
 		
 		QuestionEntity createdQuestion = questionRepository.save(questionEntity);
 		

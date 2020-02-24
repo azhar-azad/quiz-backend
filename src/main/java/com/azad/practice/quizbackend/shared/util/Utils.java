@@ -14,6 +14,10 @@ public class Utils {
     public String generateQuestionId(int length) {
         return "que:-" + generateRandomString(length) + "Q";
     }
+    
+    public String generateOptionsId(int length) {
+        return "opt:-" + generateRandomString(length) + "O";
+    }
 
     private String generateRandomString(int length) {
         StringBuilder returnValue = new StringBuilder(length);

@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,15 +18,21 @@ public class QuestionEntity implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
-	@Column(nullable = false)
+
+	@Column(nullable = false, unique = true)
 	private String questionId;
-	
+
 	@Column(nullable = false)
 	private String text;
-	
+
 	@Column(nullable = false)
 	private double mark;
+
+	@OneToOne(mappedBy = "question")
+	private AnswerEntity answer;
+
+	@OneToOne
+	private OptionsEntity options;
 
 	protected QuestionEntity() {
 		super();
@@ -64,6 +71,22 @@ public class QuestionEntity implements Serializable {
 
 	public void setMark(double mark) {
 		this.mark = mark;
+	}
+
+	public AnswerEntity getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(AnswerEntity answer) {
+		this.answer = answer;
+	}
+
+	public OptionsEntity getOptions() {
+		return options;
+	}
+
+	public void setOptions(OptionsEntity options) {
+		this.options = options;
 	}
 
 }

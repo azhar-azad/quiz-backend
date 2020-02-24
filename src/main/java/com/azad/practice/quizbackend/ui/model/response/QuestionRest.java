@@ -1,10 +1,13 @@
 package com.azad.practice.quizbackend.ui.model.response;
 
+import java.util.List;
+
 public class QuestionRest {
 
 	private String questionId;
 	private String text;
 	private double mark;
+	private List<String> optionsList;
 
 	protected QuestionRest() {
 		super();
@@ -39,6 +42,14 @@ public class QuestionRest {
 
 	public void setMark(double mark) {
 		this.mark = mark;
+	}
+
+	public List<String> getOptionsList() {
+		return optionsList;
+	}
+
+	public void setOptionsList(List<String> optionsList) {
+		this.optionsList = optionsList;
 	}
 
 }
