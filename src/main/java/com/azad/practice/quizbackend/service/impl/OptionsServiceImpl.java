@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.azad.practice.quizbackend.exception.OptionsServiceException;
 import com.azad.practice.quizbackend.exception.QuestionServiceException;
 import com.azad.practice.quizbackend.io.entity.OptionsEntity;
 import com.azad.practice.quizbackend.io.entity.QuestionEntity;
@@ -85,30 +86,32 @@ public class OptionsServiceImpl implements OptionsService {
 //		return returnValueList;
 //	}
 //
-//	@Override
-//	public QuestionDto updateQuestion(String questionId, QuestionDto questionDto) {
-//		
-//		QuestionEntity fetchedQuestion = questionRepository.findByQuestionId(questionId);
-//		
-//		fetchedQuestion.setText(questionDto.getText());
-//		fetchedQuestion.setMark(questionDto.getMark());
-//		
-//		QuestionEntity updatedQuestion = questionRepository.save(fetchedQuestion);
-//		
-//		QuestionDto returnValue = modelMapper.map(updatedQuestion, QuestionDto.class);
-//		return returnValue;
-//	}
-//
-//	@Override
-//	public void deleteQuestion(String questionId) {
-//		
-//		QuestionEntity questionEntity = questionRepository.findByQuestionId(questionId);
-//
-//		if (questionEntity == null) {
-//			throw new QuestionServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
-//		}
-//		
-//		questionRepository.delete(questionEntity);
-//	}
+	@Override
+	public OptionsDto updateOptions(String optionsId, OptionsDto optionsDto) {
+		
+		OptionsEntity fetchedOptions = optionsRepository.findByOptionsId(optionsId);
+		
+		fetchedOptions.setOption1(optionsDto.getOption1());
+		fetchedOptions.setOption2(optionsDto.getOption2());
+		fetchedOptions.setOption3(optionsDto.getOption3());
+		fetchedOptions.setOption4(optionsDto.getOption4());
+		
+		OptionsEntity updatedOptions = optionsRepository.save(fetchedOptions);
+		
+		OptionsDto returnValue = modelMapper.map(updatedOptions, OptionsDto.class);
+		return returnValue;
+	}
+
+	@Override
+	public void deleteOptions(String optionsId) {
+		
+		OptionsEntity optionsEntity = optionsRepository.findByOptionsId(optionsId);
+
+		if (optionsEntity == null) {
+			throw new OptionsServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
+		}
+		
+		optionsRepository.delete(optionsEntity);
+	}
 
 }

@@ -56,19 +56,6 @@ public class OptionsEntity implements Serializable {
 		this.option4 = option4;
 	}
 
-	public OptionsEntity(List<String> optionsList) {
-		super();
-		this.optionsList = optionsList;
-		populateOptinsFromList();
-	}
-
-	private void populateOptinsFromList() {
-		this.option1 = this.optionsList.get(0);
-		this.option2 = this.optionsList.get(1);
-		this.option3 = this.optionsList.get(2);
-		this.option4 = this.optionsList.get(3);
-	}
-
 	public Long getId() {
 		return id;
 	}

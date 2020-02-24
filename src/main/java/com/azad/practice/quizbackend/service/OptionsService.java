@@ -11,5 +11,9 @@ public interface OptionsService {
 	OptionsDto createOptions(OptionsDto optionsDto);
 	
 	public OptionsEntity getOptionsByOptionsId(String optionsId);
+	
+	public OptionsDto updateOptions(String optionsId, OptionsDto optionsDto);
+	
+	public void deleteOptions(String optionsId);
 
 }

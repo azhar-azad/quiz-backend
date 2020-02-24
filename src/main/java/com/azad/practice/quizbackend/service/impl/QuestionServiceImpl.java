@@ -85,7 +85,12 @@ public class QuestionServiceImpl implements QuestionService {
 		QuestionEntity fetchedQuestion = questionRepository.findByQuestionId(questionId);
 		
 		fetchedQuestion.setText(questionDto.getText());
-		fetchedQuestion.setMark(questionDto.getMark());
+		fetchedQuestion.setMark(questionDto.getMark()); 
+
+		String fetchedOptionsId = fetchedQuestion.getOptions().getOptionsId();
+		OptionsDto optionsDto = new OptionsDto(fetchedOptionsId, questionDto.getOptionsList());
+		OptionsDto updatedOptions = optionsService.updateOptions(fetchedOptionsId, optionsDto);
+		fetchedQuestion.setOptions(optionsService.getOptionsByOptionsId(updatedOptions.getOptionsId()));
 		
 		QuestionEntity updatedQuestion = questionRepository.save(fetchedQuestion);
 		
@@ -97,12 +102,15 @@ public class QuestionServiceImpl implements QuestionService {
 	public void deleteQuestion(String questionId) {
 		
 		QuestionEntity questionEntity = questionRepository.findByQuestionId(questionId);
-
+		
 		if (questionEntity == null) {
 			throw new QuestionServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
 		}
 		
+		String fetchedOptionsId = questionEntity.getOptions().getOptionsId();
+		
 		questionRepository.delete(questionEntity);
+		optionsService.deleteOptions(fetchedOptionsId);
 	}
 
 }
