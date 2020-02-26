@@ -11,5 +11,7 @@ public interface AnswerService {
 	AnswerDto createAnswer(AnswerDto answerDto);
 
 	AnswerEntity getAnswerByAnswerId(String answerId);
+	
+	AnswerDto updateAnswer(String answerId, AnswerDto answerDto);
 
 }

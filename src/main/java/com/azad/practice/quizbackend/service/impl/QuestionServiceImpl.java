@@ -99,9 +99,15 @@ public class QuestionServiceImpl implements QuestionService {
 
 		String fetchedOptionsId = fetchedQuestion.getOptions().getOptionsId();
 		OptionsDto optionsDto = new OptionsDto(fetchedOptionsId, questionDto.getOptionsList());
-		OptionsDto updatedOptions = optionsService.updateOptions(fetchedOptionsId, optionsDto);
-		fetchedQuestion.setOptions(optionsService.getOptionsByOptionsId(updatedOptions.getOptionsId()));
+		OptionsDto updatedOptions = optionsService.updateOptions(fetchedOptionsId, optionsDto);	
+		
+		String fetchedAnswerId = fetchedQuestion.getAnswer().getAnswerId();
+		AnswerDto answerDto = new AnswerDto(questionDto.getAnswerText());
+		AnswerDto updatedAnswer = answerService.updateAnswer(fetchedAnswerId, answerDto);
+		
 //		fetchedQuestion.setOptions(optionsService.getOptionsEntity(updatedOptions));
+		fetchedQuestion.setOptions(optionsService.getOptionsByOptionsId(updatedOptions.getOptionsId()));
+		fetchedQuestion.setAnswer(answerService.getAnswerByAnswerId(updatedAnswer.getAnswerId()));
 		
 		QuestionEntity updatedQuestion = questionRepository.save(fetchedQuestion);
 		

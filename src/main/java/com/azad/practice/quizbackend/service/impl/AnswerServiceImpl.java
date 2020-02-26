@@ -78,26 +78,19 @@ public class AnswerServiceImpl implements AnswerService {
 //		}
 //		return returnValueList;
 //	}
-//
-//	@Override
-//	public QuestionDto updateQuestion(String questionId, QuestionDto questionDto) {
-//		
-//		QuestionEntity fetchedQuestion = questionRepository.findByQuestionId(questionId);
-//		
-//		fetchedQuestion.setText(questionDto.getText());
-//		fetchedQuestion.setMark(questionDto.getMark()); 
-//
-//		String fetchedOptionsId = fetchedQuestion.getOptions().getOptionsId();
-//		OptionsDto optionsDto = new OptionsDto(fetchedOptionsId, questionDto.getOptionsList());
-//		OptionsDto updatedOptions = optionsService.updateOptions(fetchedOptionsId, optionsDto);
-//		fetchedQuestion.setOptions(optionsService.getOptionsByOptionsId(updatedOptions.getOptionsId()));
-////		fetchedQuestion.setOptions(optionsService.getOptionsEntity(updatedOptions));
-//		
-//		QuestionEntity updatedQuestion = questionRepository.save(fetchedQuestion);
-//		
-//		QuestionDto returnValue = modelMapper.map(updatedQuestion, QuestionDto.class);
-//		return returnValue;
-//	}
+
+	@Override
+	public AnswerDto updateAnswer(String answerId, AnswerDto answerDto) {
+		
+		AnswerEntity fetchedAnswer = answerRepository.findByAnswerId(answerId);
+		
+		fetchedAnswer.setText(answerDto.getText());
+		
+		AnswerEntity updatedAnswer = answerRepository.save(fetchedAnswer);
+		
+		AnswerDto returnValue = modelMapper.map(updatedAnswer, AnswerDto.class);
+		return returnValue;
+	}
 //
 //	@Override
 //	public void deleteQuestion(String questionId) {
