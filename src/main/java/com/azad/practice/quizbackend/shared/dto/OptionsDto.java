@@ -46,7 +46,7 @@ public class OptionsDto implements Serializable {
 		populateOptinsFromList();
 	}
 
-	private void populateOptinsFromList() {
+	public void populateOptinsFromList() {
 		this.option1 = this.optionsList.get(0);
 		this.option2 = this.optionsList.get(1);
 		this.option3 = this.optionsList.get(2);

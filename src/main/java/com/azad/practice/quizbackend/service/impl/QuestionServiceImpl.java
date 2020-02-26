@@ -13,8 +13,10 @@ import org.springframework.stereotype.Service;
 import com.azad.practice.quizbackend.exception.QuestionServiceException;
 import com.azad.practice.quizbackend.io.entity.QuestionEntity;
 import com.azad.practice.quizbackend.io.repository.QuestionRepository;
+import com.azad.practice.quizbackend.service.AnswerService;
 import com.azad.practice.quizbackend.service.OptionsService;
 import com.azad.practice.quizbackend.service.QuestionService;
+import com.azad.practice.quizbackend.shared.dto.AnswerDto;
 import com.azad.practice.quizbackend.shared.dto.OptionsDto;
 import com.azad.practice.quizbackend.shared.dto.QuestionDto;
 import com.azad.practice.quizbackend.shared.util.Utils;
@@ -32,6 +34,9 @@ public class QuestionServiceImpl implements QuestionService {
 	@Autowired
 	OptionsService optionsService;
 	
+	@Autowired
+	AnswerService answerService;
+	
 	ModelMapper modelMapper = new ModelMapper();
 
 	@Override
@@ -42,8 +47,13 @@ public class QuestionServiceImpl implements QuestionService {
 		OptionsDto optionsDto = new OptionsDto(questionDto.getText(), questionDto.getOptionsList());
 		OptionsDto savedOptions = optionsService.createOptions(optionsDto);
 		
+		AnswerDto answerDto = new AnswerDto(questionDto.getAnswerText());
+		AnswerDto savedAnswer = answerService.createAnswer(answerDto);
+		
 		questionEntity.setQuestionId(utils.generateQuestionId(10));
 		questionEntity.setOptions(optionsService.getOptionsByOptionsId(savedOptions.getOptionsId()));
+		questionEntity.setAnswer(answerService.getAnswerByAnswerId(savedAnswer.getAnswerId()));
+//		questionEntity.setOptions(optionsService.getOptionsEntity(savedOptions));
 		
 		QuestionEntity createdQuestion = questionRepository.save(questionEntity);
 		
@@ -91,6 +101,7 @@ public class QuestionServiceImpl implements QuestionService {
 		OptionsDto optionsDto = new OptionsDto(fetchedOptionsId, questionDto.getOptionsList());
 		OptionsDto updatedOptions = optionsService.updateOptions(fetchedOptionsId, optionsDto);
 		fetchedQuestion.setOptions(optionsService.getOptionsByOptionsId(updatedOptions.getOptionsId()));
+//		fetchedQuestion.setOptions(optionsService.getOptionsEntity(updatedOptions));
 		
 		QuestionEntity updatedQuestion = questionRepository.save(fetchedQuestion);
 		

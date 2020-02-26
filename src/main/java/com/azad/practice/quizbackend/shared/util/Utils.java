@@ -19,6 +19,10 @@ public class Utils {
         return "opt:-" + generateRandomString(length) + "O";
     }
 
+	public String generateAnswerId(int length) {
+		return "ans:-" + generateRandomString(length) + "A";
+	}
+
     private String generateRandomString(int length) {
         StringBuilder returnValue = new StringBuilder(length);
 

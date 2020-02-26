@@ -7,6 +7,7 @@ public class QuestionDetailsRequestModel {
 	private String text;
 	private String mark;
 	private List<String> optionsList;
+	private String answerText;
 
 	protected QuestionDetailsRequestModel() {
 		super();
@@ -40,6 +41,14 @@ public class QuestionDetailsRequestModel {
 
 	public void setOptionsList(List<String> optionsList) {
 		this.optionsList = optionsList;
+	}
+
+	public String getAnswerText() {
+		return answerText;
+	}
+
+	public void setAnswerText(String answerText) {
+		this.answerText = answerText;
 	}
 
 }

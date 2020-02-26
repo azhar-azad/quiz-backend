@@ -12,6 +12,7 @@ public class QuestionDto implements Serializable {
 	private String text;
 	private double mark;
 	private List<String> optionsList;
+	private String answerText;
 
 	protected QuestionDto() {
 		super();
@@ -63,6 +64,14 @@ public class QuestionDto implements Serializable {
 
 	public void setOptionsList(List<String> optionsList) {
 		this.optionsList = optionsList;
+	}
+
+	public String getAnswerText() {
+		return answerText;
+	}
+
+	public void setAnswerText(String answerText) {
+		this.answerText = answerText;
 	}
 
 }

@@ -28,7 +28,7 @@ public class QuestionEntity implements Serializable {
 	@Column(nullable = false)
 	private double mark;
 
-	@OneToOne(mappedBy = "question")
+	@OneToOne
 	private AnswerEntity answer;
 
 	@OneToOne

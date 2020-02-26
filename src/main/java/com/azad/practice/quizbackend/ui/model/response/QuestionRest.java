@@ -8,6 +8,7 @@ public class QuestionRest {
 	private String text;
 	private double mark;
 	private List<String> optionsList;
+	private String answerText;
 
 	protected QuestionRest() {
 		super();
@@ -50,6 +51,14 @@ public class QuestionRest {
 
 	public void setOptionsList(List<String> optionsList) {
 		this.optionsList = optionsList;
+	}
+
+	public String getAnswerText() {
+		return answerText;
+	}
+
+	public void setAnswerText(String answerText) {
+		this.answerText = answerText;
 	}
 
 }
